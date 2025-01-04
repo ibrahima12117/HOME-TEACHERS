@@ -7,6 +7,7 @@ import Link from "next/link";
 export default function Page() {
   return (
     <div>
+      
       <Navbar />
       <div className=" ibou flex gap-10">
         <div className="mt-20 ml-8">

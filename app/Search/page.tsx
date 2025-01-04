@@ -13,7 +13,7 @@ function Search() {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`/api/search?q=${query}`);
+      const response = await fetch(`/api/recherche?q=${query}`);
       if (!response.ok) {
         throw new Error("Erreur lors de la recherche");
       }
