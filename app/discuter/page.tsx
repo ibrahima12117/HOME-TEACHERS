@@ -3,59 +3,75 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import apiClient from "../api/axios";
 
 interface FormData {
   prenom: string;
   nom: string;
   email: string;
-  telephone: string;
-  lieu: string;
-  formation: string;
+  numeroDeTelephone: string;
+  codePostal: string;
+  niveau: string;
+  moyenneDernierControle: string;
+  nombreEleveBesoinProfesseur: string;
+  typeProfesseur: string;
+  notelorsdeladerniercontrole: string;
 }
-
-export default function Home() {
+export default function DiscuterPage() {
   const [formData, setFormData] = useState<FormData>({
     prenom: "",
     nom: "",
     email: "",
-    telephone: "",
-    lieu: "",
-    formation: "",
+    numeroDeTelephone: "",
+    codePostal: "",
+    niveau: "",
+    moyenneDernierControle: "",
+    nombreEleveBesoinProfesseur: "",
+    typeProfesseur: "",
+    notelorsdeladerniercontrole: "",
   });
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handlePhoneChange = (value: string) => {
-    setFormData({
-      ...formData,
-      telephone: value,
-    });
+    setFormData({ ...formData, numeroDeTelephone: value });
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Code pour gérer la soumission du formulaire
-    console.log(formData);
+
+    try {
+      const response = await apiClient.post("/api/discu", formData);
+
+      if (response.status === 201) {
+        console.log("Data submitted successfully");
+      } else {
+        console.log("Failed to submit data");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleClose = () => {
-    // Rediriger vers une page vide pour simuler la fermeture
-    window.location.href = "/"; // Redirige vers la page d'accueil
+    window.location.href = "/";
   };
-  const [submitted, setSubmitted] = useState(false); const handleFormSubmit = (event: FormEvent) => { event.preventDefault(); handleSubmit(event); setSubmitted(true); };
+  const [submitted, setSubmitted] = useState(false);
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    handleSubmit(event);
+    setSubmitted(true);
+  };
 
   return (
     <form onSubmit={handleSubmit} className="mt-44 mb-44">
-      <div className="flex justify-center items-center w-screen h-screen">
-        <div className="w-2/3 h-auto bg-sky-500 rounded-2xl relative">
+      <div className="flex justify-center items-center w-screen h-screen mt-10">
+        <div className="w-2/3 h-auto bg-sky-500 rounded-2xl relative res">
           <button
             type="button"
             className="absolute top-4 right-4 text-white"
@@ -74,58 +90,57 @@ export default function Home() {
               inscription{" "}
             </p>
           </div>
-          <div className="flex gap-28 space-y-4">
-            <div className="ml-4 mt-3">
-              <label htmlFor="prenom" className="block text-black font-bold">
+          
+          <div className="flex gap-2 space-y-4 dis">
+            <div className="ml-4 mt-3 pre">
+              <label htmlFor="prenom" className="block text-black font-bold ">
                 Prénom:
               </label>
               <input
                 type="text"
-                id="prenom"
                 name="prenom"
                 value={formData.prenom}
                 onChange={handleChange}
-                className="mt-1 block px-16 rounded-md text-black  focus:ring-opacity-50"
+                className="mt-1 block px-16 rounded-md text-black  focus:ring-opacity-50  "
               />
             </div>
-            <div>
+            <br/>
+            <div className="">
               <label htmlFor="nom" className="block text-black font-bold">
                 Nom:
               </label>
               <input
                 type="text"
-                id="nom"
                 name="nom"
                 value={formData.nom}
                 onChange={handleChange}
-                className="-mt-20  rounded-md px-16 text-black focus:ring-opacity-50"
+                className="  rounded-md px-16 text-black focus:ring-opacity-50"
               />
             </div>
           </div>
-          <div className="flex  space-y-4">
-            <div className="ml-4 mt-5">
+          <div className="flex  space-y-4 dis1">
+            <div className="ml-4 mt-5 ">
               <label htmlFor="email" className="block text-black font-bold">
                 Email:
               </label>
               <input
                 type="email"
-                id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 className="mt-1 block px-16 rounded-md text-black focus:ring-opacity-50"
               />
             </div>
-            <div className="ml-16 mt-3">
+            <div className="ml-16 mt-3 tel">
               <label
-                htmlFor="telephone"
+                htmlFor="numeDeTelephone"
                 className="block text-black font-bold ml-12 "
               >
                 Numero de Téléphone:
               </label>
               <PhoneInput
                 country={"sn"}
-                value={formData.telephone}
+                value={formData.numeroDeTelephone}
                 onChange={handlePhoneChange}
                 inputProps={{
                   name: "telephone",
@@ -137,66 +152,108 @@ export default function Home() {
             </div>
           </div>
           <div className=" mt-4">
-            <label htmlFor="Code postal" className="text-black ml-5 font-bold">
+            {" "}
+            <label htmlFor="codePostal" className="text-black ml-5 font-bold">
               Code postal:
-            </label>
-            <br />
+            </label>{" "}
+            <br />{" "}
             <input
               type="text"
-              id="lieu"
-              name="lieu"
-              value={formData.lieu}
+              name="codePostal"
+              value={formData.codePostal}
+              onChange={handleChange}
               className="rounded-md ml-5 w-5/6 px-20 text-black"
-            />
-          </div>
+            />{" "}
+          </div>{" "}
           <div className=" mt-4">
-            <label htmlFor="Niveau" className="text-black ml-5 font-bold">
+            {" "}
+            <label htmlFor="niveau" className="text-black ml-5 font-bold">
               Quel est votre niveau?
-            </label>
+            </label>{" "}
             <input
               type="text"
+              name="niveau"
+              value={formData.niveau}
+              onChange={handleChange}
               placeholder="classe"
               className="rounded-md ml-5 w-5/6 px-20 text-black"
-            />
-          </div>
+            />{" "}
+          </div>{" "}
           <div className=" mt-4">
-            <label htmlFor="Note" className="text-black ml-5 font-bold">
+            {" "}
+            <label
+              htmlFor="moyenneDernierControle"
+              className="text-black ml-5 font-bold"
+            >
               Quel est la moyenne vous aviez eut lors de votre dernier controle?
-            </label>
+            </label>{" "}
             <input
               type="text"
+              name="moyenneDernierControle"
+              value={formData.moyenneDernierControle}
+              onChange={handleChange}
               className="rounded-md ml-5 w-5/6 px-20 text-black"
-            />
-          </div>
+            />{" "}
+          </div>{" "}
           <div className=" mt-4">
-            <label htmlFor="Nombre" className="text-black ml-5 font-bold">
+            {" "}
+            <label
+              htmlFor="nombreEleveBesoinProfesseur"
+              className="text-black ml-5 font-bold"
+            >
               Quels est le nombre eleve qui on besoin de professeur?
-            </label>
+            </label>{" "}
             <input
               type="number"
+              name="nombreEleveBesoinProfesseur"
+              value={formData.nombreEleveBesoinProfesseur}
+              onChange={handleChange}
               className="rounded-md ml-5 w-5/6 px-20 text-black"
-            />
-          </div>
+            />{" "}
+          </div>{" "}
           <div className=" mt-4">
-            <label htmlFor="" className="text-black ml-5 font-bold">
+            {" "}
+            <label
+              htmlFor="typeProfesseur"
+              className="text-black ml-5 font-bold"
+            >
               De quel professeur avait vous besoin?
-            </label>
+            </label>{" "}
             <input
               type="text"
+              name="typeProfesseur"
+              value={formData.typeProfesseur}
+              onChange={handleChange}
               placeholder="math pc francais..."
               className="rounded-md ml-5 w-5/6 px-20 text-black"
-            />
+            />{" "}
             <div className="mt-4">
-              <label className="text-black ml-5 font-bold">Combien d'eleve on besoin d'enseignant?</label>
+              {" "}
+              <label
+                htmlFor="notelorsdeladerniercontrole"
+                className="text-black ml-5 font-bold"
+              >
+                Votre note lors de votre dernier controle sur cette (ces)
+                matiere(s)
+              </label>{" "}
               <input
                 type="number"
-                placeholder="1ou2 ou..."
+                name="notelorsdeladerniercontrole"
+                value={formData.notelorsdeladerniercontrole}
+                onChange={handleChange}
                 className="rounded-md ml-5 w-5/6 px-20 text-black"
-              />
-            </div>
-          </div>
+              />{" "}
+            </div>{" "}
+          </div>{" "}
           <div className="flex justify-end">
-            <button type="submit" className="mt-7 px-16 py-3 bg-black rounded-xl flex items-end m-9 text-2xl font-bold text-white" > Soumettre </button>
+            {" "}
+            <button
+              type="submit"
+              className="mt-7 px-16 py-3 bg-black rounded-xl flex items-end m-9 text-2xl font-bold text-white"
+            >
+              {" "}
+              Soumettre{" "}
+            </button>{" "}
           </div>
         </div>
       </div>

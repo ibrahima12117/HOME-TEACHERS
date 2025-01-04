@@ -20,12 +20,89 @@ body {
   background-color: black;
   font-family: Arial, Helvetica, sans-serif;
 }
-@media (max-width: 850px) {
-  body {
-    background-color: black;
+
+
+@media (max-width: 810px) {
+  .ibou {
+    flex-direction: column;
   }
+ .ibou1{
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ }
+ .nana{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+ }
+ .nana1{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+ }
+ .imad{
+ 
+  float:right;
+
+  margin: 0 15px 15px 0;
+ }
+ .im1{
+  
+  width: 900px;
+ }
+ .dis{
+  display: flex;
+  flex-direction: column;
+ }
+ .dis1{
+  display: flex;
+  flex-direction: column;
+ }
+ .buut{
+  width: auto;
+ }
+ .res{
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+ margin: 20px;
+ }
+ .tel{
+  margin-left: -25px;
+ }
+ 
 }
-img {
-  max-width: 100%;
-  height: auto;
+
+/*unvisited link*/
+a:link{
+  color: skyblue;
 }
+/*visibilited link*/
+a:visited {
+  color: white;
+}
+/*mouse over link*/
+a:hover{
+  color:skyblue;
+}
+/*selected link*/
+a:active{
+  color: rgb(59, 179, 226);
+  }
+ 
+
+/*visibilited link*/
+button:visited {
+  background-color: rgb(22, 163, 116);
+}
+/*mouse over link*/
+button:hover{
+  background-color: rgb(223, 118, 136);
+}
+/*selected link*/
+button:active{
+  background-color: greenyellow;
+  }

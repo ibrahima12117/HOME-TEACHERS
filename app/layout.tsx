@@ -27,7 +27,8 @@ export default function RootLayout({
   return (
     <html lang="en">
      <head>
-        <link rel="" href="images/favicon.png" />
+     <script src="http://localhost:3000"></script>
+        <link rel="icon" href="favicon.ico" />
         <title className="notranslate">HOME TEACHERS</title>
         <link
   rel="stylesheet"
@@ -37,7 +38,7 @@ export default function RootLayout({
         <meta name="description" content="Web site created..." />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ` }
       >
         {children}
       </body>

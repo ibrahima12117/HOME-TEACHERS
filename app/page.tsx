@@ -1,12 +1,14 @@
 "use client";
 import Navbar from "./components/Navbar";
 import ExpandableSection from "./components/Section";
+import CONTACT from "@/app/components/contact";
 import Link from "next/link";
+
 export default function Page() {
   return (
-    <div >
+    <div>
       <Navbar />
-      <div className="flex gap-10">
+      <div className=" ibou flex gap-10">
         <div className="mt-20 ml-8">
           <h1 className="notranslate text-4xl font-light">
             Renforcer vos competences avec HOME TEACHERS
@@ -38,7 +40,7 @@ export default function Page() {
           alt=""
         />
       </div>
-      <section className="text-center m-10">
+      <div className="text-center m-10">
         <h2 className="text-3xl font-bold">
           Fait evouler vos competence et ceux de vos enfants
         </h2>
@@ -48,28 +50,30 @@ export default function Page() {
           professeurs à apprendre à faire des choix et à travailler ensemble
           pour améliorer leur enfant.
         </p>
-      </section>
-      <div className="w-full h-60 rounded-2xl mt-8 bg-sky-500 flex gap-16">
+      </div>
+      <div className="w-full h-auto rounded-2xl mt-8 bg-sky-500 flex  gap-16  ">
         <div>
           <h1 className="text-2xl font-bold ml-5 ">
             Decouvrer la meilleure version de vous meme grace HOME TEACHERS
           </h1>
-          <p className="ml-5 text-xl mt-5">
+          <p className="ml-5 text-xl mt-5  ">
             Avec HOME TEACHERS, l'apprentissage se fait dans le confort de votre
             domicile. Plus besoin de se déplacer ou de s'adapter à des horaires
             fixes. Nos enseignants viennent à vous, selon votre emploi du temps.
           </p>
           <Link href="/discuter">
-          <button className="bg-black px-5 rounded-2xl mt-5 ml-5">
-            discuter avec nos conseillers
-          </button>
+            <button className="bg-black px-5 rounded-2xl mt-5 ml-5">
+              discuter avec nos conseillers
+            </button>
           </Link>
         </div>
+        <div className="imad">
         <img
-          src="https://images.pexels.com/photos/21696/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          className="rounded-full mr-8 h-60 w-80"
+          src="images/success.png"
+          className="rounded-2xl mr-8 h-52 w-64 im1"
           alt=""
         />
+        </div>
       </div>
       <div className="mt-10 ml-7 h-auto max-w-full bg-slate-900 rounded-2xl">
         <div className="flex gap-11">
@@ -105,34 +109,35 @@ export default function Page() {
           content="Chez HOME TEACHERS, notre mission est de fournir une éducation de qualité supérieure qui inspire, motive et prépare les élèves à relever les défis académiques et personnels. Nous visons à créer un environnement d'apprentissage stimulant où chaque élève peut s'épanouir et atteindre son plein potentiel."
         />
       </div>
-      <section className="m-8 flex gap-10">
+      <section className=" ibou m-2 flex gap-10">
         <img
           src="https://images.pexels.com/photos/3992949/pexels-photo-3992949.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
           className="h-6/7 rounded-2xl"
           alt=""
         />
-        <h1 className="text-3xl font-bold mt-44">
+        <h1 className="text-3xl font-bold mt-44 ibou2">
           Uni nous surmonterons tous les obsclates et assurer une place on nos
-          enfant{" "}
+          enfants{" "}
         </h1>
       </section>
 
-      <footer className="w-7/8 h-56 bg-sky-500 rounded-2xl block m-10">
+      <footer className="w-full h-auto bg-sky-500  block m-10">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0 ">
-            <h1 className="text-2xl font-bold">HOME TEACHERS</h1>
-            <a href="/about" className="hover:underline ">
+          <div className="mb-4 md:mb-0 ml-9 text-xl">
+            <h1 className="text-2xl font-bold ">HOME TEACHERS</h1>
+            <a href="/about" className="hover:underline mt-5">
               À propos
             </a>
             <br />
-            <a href="/contact" className="hover:underline">
-              Contact
-            </a>
+            <div className="-ml-56 mt-6 text-center">
+              {" "}
+              <CONTACT />{" "}
+            </div>
             <br />
-            <a href="/privacy" className="hover:underline">
+            <a href="/privacy" className="hover:underline mt-6">
               Politique de confidentialité
             </a>
-            <p className="text-sm">
+            <p className="text-sm mt-7">
               © 2024 Home Teachers. Tous droits réservés.
             </p>
           </div>

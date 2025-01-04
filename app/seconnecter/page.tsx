@@ -1,16 +1,24 @@
 "use client";
 import Navbar from "../components/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import CONTACT from "@/app/components/contact";
+import React from "react";
+import axios from "axios";
+
 
 library.add(faEye, faEyeSlash);
 
-function Conecter() {
+const Conecter = () => {
+  const [nom, setNom] = useState('');
+  const [email, setEmail] = useState('');
+  const [numeroDeTelephone, setNumeroDeTelephone] = useState('');
+  const [motDePasse, setMotDePasse] = useState('');
   const [passwordType, setPasswordType] = useState("password");
   const [icon, setIcon] = useState(faEye);
-
+  
   const togglePassword = () => {
     if (passwordType === "password") {
       setPasswordType("text");
@@ -20,34 +28,51 @@ function Conecter() {
       setIcon(faEye);
     }
   };
+  const handleSubmit = async(e) => {
+    e.preventDefault()
+      try {
+       const response = await axios.post('/api/users/', {nom, email, numeroDeTelephone, motDePasse});
+       console.log(response);
+      }catch (err) {
+        console.log(err);
+      }
+    
+  }
+   
 
   return (
     <div>
       <Navbar />
-      <section className="flex m-9 justify-center">
-        <div className="bg-sky-500 w-1/3 h-auto rounded-2xl p-6">
+      <section className="flex flex-col-reverse md:flex-row m-9 justify-center">
+        <div className="bg-sky-500 w-full md:w-1/2 h-auto rounded-2xl p-6">
           <h1 className="text-2xl font-bold text-black mb-4 notranslate">
             HOME TEACHERS
           </h1>
           <p className="text-black mb-6">
             Creer votre compte et connectez-vous a HOME TEACHERS.
           </p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <label htmlFor="">Nom:</label>
             <input
               type="text"
+              value={nom}
+             onChange={(e) => setNom(e.target.value)}
               placeholder="Nom"
               className="bg-black w-full h-14 rounded-2xl mb-4"
             />
             <label htmlFor="">Email:</label>
             <input
               type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Email "
               className="bg-black w-full h-14 rounded-2xl mb-4"
             />
             <label htmlFor="">Numero de telephone:</label>
             <input
               type="number"
+              value={numeroDeTelephone}
+              onChange={(e) => setNumeroDeTelephone(e.target.value)}
               placeholder="Numero de telephone"
               className="bg-black w-full h-14 rounded-2xl mb-4"
             />
@@ -55,6 +80,9 @@ function Conecter() {
             <div className="relative mb-4">
               <input
                 type={passwordType}
+                value={motDePasse}
+                onChange={(e) => setMotDePasse(e.target.value)}
+               
                 placeholder="Mot de passe"
                 className="bg-black w-full h-14 rounded-2xl"
               />
@@ -70,6 +98,8 @@ function Conecter() {
             <div className="relative mb-4">
               <input
                 type={passwordType}
+                value={motDePasse}
+                onChange={(e) => setMotDePasse(e.target.value)}
                 placeholder="Confirmer le mot de passe"
                 className="bg-black w-full h-14 rounded-2xl"
               />
@@ -104,22 +134,23 @@ function Conecter() {
           </div>
         </div>
       </section>
-      <footer className="w-full h-56 mt-7 bg-sky-500 rounded-2xl block">
+      <footer className="w-7/8 h-56 bg-sky-500 rounded-2xl block m-10">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0 ">
-            <h1 className="text-2xl font-bold">HOME TEACHERS</h1>
-            <a href="/about" className="hover:underline ">
+          <div className="mb-4 md:mb-0 ml-9 text-xl">
+            <h1 className="text-2xl font-bold ">HOME TEACHERS</h1>
+            <a href="/about" className="hover:underline mt-5">
               À propos
             </a>
             <br />
-            <a href="/contact" className="hover:underline">
-              Contact
-            </a>
+            <div className="-ml-56 mt-6 text-center">
+              {" "}
+              <CONTACT />{" "}
+            </div>
             <br />
-            <a href="/privacy" className="hover:underline">
+            <a href="/privacy" className="hover:underline mt-6">
               Politique de confidentialité
             </a>
-            <p className="text-sm">
+            <p className="text-sm mt-7">
               © 2024 Home Teachers. Tous droits réservés.
             </p>
           </div>
